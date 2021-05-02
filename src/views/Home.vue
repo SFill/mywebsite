@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
     <div class="section header">
-      <div class="header__left">
+      <div class="col header__left">
         <div class="title">
           <div class="title__text">{{ title }}</div>
         </div>
@@ -9,14 +9,17 @@
           <a href="https://t.me/come_on00">Телеграм</a>
           <a href="https://github.com/SFill">Гитхаб</a>
           <router-link to="/blog">Бложик</router-link>
-          <a href="https://vladimir.hh.ru/resume/6a19f16cff0427335c0039ed1f3073444d5650">CV</a>
+          <a
+            href="https://vladimir.hh.ru/resume/6a19f16cff0427335c0039ed1f3073444d5650"
+            >CV</a
+          >
         </nav>
         <div class="information">
           <p>Пишу на питоне</p>
         </div>
       </div>
 
-      <div class="header__right">
+      <div class="col header__right">
         <div class="my-photo">
           <img src="../assets/my-photo.jpg" class="my-photo__img" />
         </div>
@@ -86,7 +89,6 @@ export default {
     };
   },
   components: {
-    // ProgressBar,
     SunBurst,
   },
 };
@@ -125,11 +127,10 @@ export default {
   text-align: left;
 }
 .my-photo {
-  width: 375px;
+  max-width: 375px;
 }
 .my-photo__img {
-  width: 375px;
-  height: 500px;
+  width: 100%;
 }
 
 .nav-bar {
@@ -149,7 +150,6 @@ export default {
 .skills {
   align-items: center;
   flex-direction: column;
-  width: 60%;
   height: 100vh;
 }
 .w50 {
@@ -171,5 +171,13 @@ export default {
 }
 .chart {
   height: 80vh;
+}
+@media only screen and (max-width: 600px) and (min-width: 400px) {
+  .section {
+    flex-direction: column;
+  }
+  .header__right {
+    order: -1;
+  }
 }
 </style>
