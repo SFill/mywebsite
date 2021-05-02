@@ -111,10 +111,7 @@ export default {
   justify-content: center;
   height: 80vh;
 }
-.header__left {
-  width: 40%;
-}
-.header__right {
+.header__left,.header__right {
   width: 40%;
 }
 .title {
@@ -172,12 +169,20 @@ export default {
 .chart {
   height: 80vh;
 }
-@media only screen and (max-width: 600px) and (min-width: 400px) {
+@media only screen and (max-width: 850px){
   .section {
     flex-direction: column;
+    align-items: center;
   }
   .header__right {
     order: -1;
   }
+  .header__left{
+    width: 100%;
+  }
+.header__left,.header__right {
+  align-items: center
+}
+  
 }
 </style>
