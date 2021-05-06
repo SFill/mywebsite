@@ -160,7 +160,7 @@ export default {
 .col {
   display: inline-flex;
   flex-direction: column;
-  padding: 10px;
+  margin: 10px;
 }
 .row {
   display: flex;
