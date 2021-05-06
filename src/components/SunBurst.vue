@@ -1,21 +1,28 @@
 <template>
-  <div class="chart"></div>
+  <div class="chart">
+    <div v-if="!chart">
+      <Loader />
+    </div>
+    <div class="chart__content"></div>
+  </div>
 </template>
 
 <script>
-/* eslint-disable */
-import Anychart from "anychart";
+import Loader from "./Loader.vue";
 export default {
   props: ["options", "Anychart"],
   name: "VueAnychart",
+  components: {
+    Loader,
+  },
   data() {
     return {
       chart: null,
     };
   },
-  mounted() {
+  async mounted() {
     if (!this.chart && this.options) {
-      this.init();
+      await this.init();
     }
   },
   methods: {
@@ -34,7 +41,7 @@ export default {
     },
     delegateMethod(name, data) {
       if (!this.chart) {
-        warn(
+        console.error(
           `Cannot call [$name] before the chart is initialized. Set prop [options] first.`,
           this
         );
@@ -42,14 +49,14 @@ export default {
       }
       return this.chart[name](data);
     },
-    init() {
+    async init() {
       if (!this.chart && this.options) {
-        let _Anychart = this.Anychart || Anychart;
+        let _Anychart = this.Anychart || (await import("anychart"));
         this.chart = new _Anychart.sunburst(this.options, "as-tree");
         this.chart.labels().position("circular");
-        this.chart.calculationMode("ordinal-from-leaves")
+        this.chart.calculationMode("ordinal-from-leaves");
 
-        this.chart.container(this.$el).draw();
+        this.chart.container(this.$el.querySelector(".chart__content")).draw();
       }
     },
   },
@@ -63,6 +70,7 @@ export default {
         this.init();
       }
     },
+    chart: function () {},
   },
   beforeUnmount() {
     if (this.chart) {
@@ -78,5 +86,9 @@ export default {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+.chart__content {
+  width: inherit;
+  height: inherit
 }
 </style>
