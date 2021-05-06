@@ -1,6 +1,11 @@
 <template>
   <div class="home-page">
     <div class="section header">
+      <div class="col">
+        <div class="my-photo">
+          <img src="../assets/my-photo.jpg" class="my-photo__img" />
+        </div>
+      </div>
       <div class="col header__left">
         <div class="title">
           <div class="title__text">{{ title }}</div>
@@ -18,25 +23,20 @@
           <p>Пишу на питоне</p>
         </div>
       </div>
-
-      <div class="col header__right">
-        <div class="my-photo">
-          <img src="../assets/my-photo.jpg" class="my-photo__img" />
-        </div>
-      </div>
     </div>
-    <div class="section skills" id="skills">
-      <div class="row w100 center">
-        <h1>Skills</h1>
-      </div>
-      <div class="row w100 center chart">
-        <SunBurst :options="sunburst" />
+    <div class="section skills center" id="skills">
+      <div class="col center w100">
+        <div class="row center">
+          <h1>Skills</h1>
+        </div>
+        <div class="row w100 center chart">
+          <SunBurst :options="sunburst" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-// import ProgressBar from "../components/ProgressBar.vue";
 import SunBurst from "../components/SunBurst.vue";
 
 export default {
@@ -99,6 +99,7 @@ export default {
   display: flex;
   margin-bottom: 80px;
   margin: 0 auto;
+  flex-direction: column;
 }
 
 .home-page {
@@ -109,14 +110,10 @@ export default {
 }
 .header {
   justify-content: center;
-  height: 80vh;
-}
-.header__left,.header__right {
-  width: 40%;
 }
 .title {
   font-family: "PT Sans";
-  font-size: 64px;
+  font-size: 32px;
 }
 
 .title__text {
@@ -124,7 +121,9 @@ export default {
   text-align: left;
 }
 .my-photo {
-  max-width: 375px;
+  max-width: 200px;
+  min-width: 180px;
+  align-self: center;
 }
 .my-photo__img {
   width: 100%;
@@ -159,8 +158,9 @@ export default {
   justify-content: center;
 }
 .col {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
+  padding: 10px;
 }
 .row {
   display: flex;
@@ -169,20 +169,15 @@ export default {
 .chart {
   height: 80vh;
 }
-@media only screen and (max-width: 850px){
+@media only screen and (min-width: 800px) {
   .section {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
   }
-  .header__right {
+  .header__left {
     order: -1;
   }
-  .header__left{
-    width: 100%;
+  .title {
+    font-size: 2em;
   }
-.header__left,.header__right {
-  align-items: center
-}
-  
 }
 </style>
